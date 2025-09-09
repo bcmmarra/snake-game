@@ -11,14 +11,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: Platane/snk@master
+      - uses: Platane/snk@v3
         id: snake-gif
         with:
-          github_user_name: bcmmarra
-          outputs: |
-            dist/github-snake.svg
-            dist/github-snake-dark.svg?palette=github-dark
-
+          github_user_name: bcmarra
+          svg_out_path: dist/github-snake.svg
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
