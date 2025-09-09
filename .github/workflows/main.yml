@@ -5,6 +5,9 @@ on:
     - cron: "0 0 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,9 +19,6 @@ jobs:
           github_user_name: bcmmarra
           outputs: dist/github-snake.svg
           
-      - name: show-svg-files
-        run: ls -F dist
-
       - name: commit-and-push
         run: |
           git config --global user.name 'github-actions[bot]'
