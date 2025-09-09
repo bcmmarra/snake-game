@@ -1,4 +1,4 @@
-name: Generate Profile Summary
+name: Generate Snake Animation
 
 on:
   schedule:
@@ -6,24 +6,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  cards:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - uses: vn7n24fzkq/github-profile-summary-cards@release
+      - name: generate-snake
+        uses: Platane/snk@v3
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          username: bcmmarra
-          output_dir: dist
-          animated_card: true
-          # Descomente a linha abaixo se quiser a versão dark
-          exclude_items: true
-          
-      # Deploy para o GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          keep_files: true
+          github_user_name: bcmmarra
+          outputs: dist/github-snake.svg
