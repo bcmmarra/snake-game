@@ -1,4 +1,4 @@
-name: Generate Snake Animation
+name: Generate Profile Summary
 
 on:
   schedule:
@@ -6,19 +6,20 @@ on:
   workflow_dispatch:
 
 jobs:
-  generate:
+  cards:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
     steps:
-      - uses: actions/checkout@v2
-
-      # Geração da animação da cobrinha
-      - name: Generate Snake SVG
-        uses: Platane/snk@v3
+      - uses: vn7n24fzkq/github-profile-summary-cards@release
         with:
-          github_user_name: bcmmarra
-          outputs: dist/github-snake.svg
-
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          username: bcmmarra
+          output_dir: dist
+          animated_card: true
+          # Descomente a linha abaixo se quiser a versão dark
+          exclude_items: true
+          
       # Deploy para o GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
